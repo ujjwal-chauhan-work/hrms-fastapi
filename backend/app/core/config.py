@@ -73,4 +73,4 @@ def get_settings() -> Settings:
     Cached settings object.
     Ensures env is read once per process.
     """
-    return Settings() # type: ignore[call-arg]  # type: ignore[arg-type]
+    return Settings()  # type: ignore[call-arg]  # type: ignore[arg-type]

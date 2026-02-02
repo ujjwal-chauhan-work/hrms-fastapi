@@ -1,13 +1,9 @@
 import logging
 import sys
 from typing import Optional
-
 from app.core.config import get_settings
 
-# Standard log format: readable + production-friendly
-LOG_FORMAT = (
-    "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
-)
+LOG_FORMAT = "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
 
 _DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
@@ -27,7 +23,6 @@ def setup_logging(log_level: Optional[str] = None) -> None:
     root_logger = logging.getLogger()
     root_logger.setLevel(level)
 
-    # Remove existing handlers (important for Uvicorn reload)
     for h in list(root_logger.handlers):
         root_logger.removeHandler(h)
 
@@ -38,7 +33,6 @@ def setup_logging(log_level: Optional[str] = None) -> None:
     handler.setFormatter(formatter)
     root_logger.addHandler(handler)
 
-    # Make uvicorn logs consistent with our root logger
     for logger_name in ("uvicorn", "uvicorn.error", "uvicorn.access"):
         logger = logging.getLogger(logger_name)
         logger.handlers = []
