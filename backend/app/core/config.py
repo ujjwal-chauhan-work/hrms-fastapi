@@ -63,6 +63,17 @@ class Settings(BaseSettings):
         )
 
     @property
+    def database_url_sync(self) -> str:
+        # Alembic should use a sync driver
+        return (
+            f"postgresql+psycopg2://{self.postgres_user}:"
+            f"{self.postgres_password}@"
+            f"{self.postgres_host}:"
+            f"{self.postgres_port}/"
+            f"{self.postgres_db}"
+        )
+
+    @property
     def redis_url(self) -> str:
         return f"redis://{self.redis_host}:{self.redis_port}"
 
